@@ -62,6 +62,9 @@ export default {
             // 응답결과를 세션에 저장 (key, value) -> key 에 value 저장
             this.$session.set('jwt', response.data.token)
 
+            // vuex store 를 this.$store 로 접근 가능
+            this.$store.dispatch('login', response.data.token)
+
             this.loading = false
 
             // vue router 를 통해 특정 페이지로 이동

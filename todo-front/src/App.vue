@@ -25,19 +25,31 @@ export default {
   data(){
     return {
       // jwt 있으면 true
-      isLoggedIn: this.$session.has('jwt')
+      // isLoggedIn: this.$session.has('jwt')
+    }
+  },
+  mounted(){
+    if(this.$session.has('jwt')){
+      const token = this.$session.get('jwt')
+      this.$store.dispatch('login', token)
+    }
+  },
+  computed: {
+    isLoggedIn() {
+      return this.$store.getters.isLoggedIn
     }
   },
   methods: {
     logout(){
       this.$session.destroy()
+      this.$store.dispatch('logout')
       router.push('/login')
     },
   },
   // data 변화 -> 실행
-  updated(){
-    this.isLoggedIn = this.$session.has('jwt')
-  }
+  // updated(){
+  //   this.isLoggedIn = this.$session.has('jwt')
+  // }
 }
 </script>
 <style>

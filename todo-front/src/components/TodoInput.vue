@@ -18,6 +18,7 @@ export default {
   methods: {
     onSubmit() {
       this.$emit('createTodo', this.title)
+      this.title = ''
     }
   }
 }
